@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   namespace :admin do
     get 'order_details/update'
   end
@@ -58,29 +58,21 @@ Rails.application.routes.draw do
     get 'cart_items/create'
   end
   namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
-    get 'customers/withdrawal'
-    get 'customers/destroy'
+    resources :customers, only: [:show, :edit, :update, :withdrawal, :destroy]
   end
   namespace :public do
-    get 'sessions/new'
-    get 'sessions/create'
-    get 'sessions/destroy'
+    resources :sessions, only: [:new, :create, :destroy]
   end
   namespace :public do
-    get 'registrations/new'
-    get 'registrations/create'
+    resources :registrations, only: [:new, :create]
   end
   namespace :public do
     resources :items, only: [:index, :show]
   end
-
   namespace :public do
-    get 'homes/top'
-    get 'homes/about'
+    resources :homes, only: [:top, :about]
   end
+
  devise_for :customers,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
