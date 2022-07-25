@@ -1,61 +1,48 @@
 Rails.application.routes.draw do
 
+ devise_for :customers,skip: [:passwords], controllers: {
+  registrations: "public/registrations",
+  sessions: 'public/sessions'
+ }
+
+# 管理者用
+# URL /admin/sign_in ...
+ devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  sessions: "admin/sessions"
+}
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root to: "public/homes#top"
   namespace :admin do
+    get 'admin/homes/top' => 'homes#top'
+  end
+  namespace :admin do
+    resources :order_details, only: [:update]
     get 'order_details/update'
   end
   namespace :admin do
-    get 'order/index'
-    get 'order/update'
+    resources :order, only: [:index, :update]
   end
   namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/update'
+    resources :customers, only: [:index, :show, :edit, :update]
   end
   namespace :admin do
-    get 'genres/index'
-    get 'genres/create'
-    get 'genres/edit'
-    get 'genres/update'
+    resources :genres, only: [:index, :create, :edit, :update]
   end
   namespace :admin do
-    get 'items/index'
-    get 'items/new'
-    get 'items/create'
-    get 'items/show'
-    get 'items/edit'
-    get 'items/update'
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
+
   namespace :admin do
-    get 'homes/top'
-  end
-  namespace :admin do
-    get 'sessions/new'
-    get 'sessions/create'
-    get 'sessions/destroy'
+    resources :sessions, only: [:new, :create, :destroy]
   end
   namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
-    get 'addresses/create'
-    get 'addresses/update'
-    get 'addresses/destroy'
+    resources :addresses, only: [:index, :edit, :create, :update, :destroy]
   end
   namespace :public do
-    get 'orders/new'
-    get 'orders/confirm'
-    get 'orders/thanks'
-    get 'orders/create'
-    get 'orders/index'
-    get 'orders/show'
+    resources :order, only: [:new, :confirm, :thanks, :create, :index, :show]
   end
   namespace :public do
-    get 'cart_items/index'
-    get 'cart_items/update'
-    get 'cart_items/destroy'
-    get 'cart_items/destroy_all'
-    get 'cart_items/create'
+    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
   end
   namespace :public do
     resources :customers, only: [:show, :edit, :update, :withdrawal, :destroy]
@@ -73,15 +60,4 @@ Rails.application.routes.draw do
     resources :homes, only: [:top, :about]
   end
 
- devise_for :customers,skip: [:passwords], controllers: {
-  registrations: "public/registrations",
-  sessions: 'public/sessions'
- }
-
-# 管理者用
-# URL /admin/sign_in ...
- devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
