@@ -1,4 +1,3 @@
-class Public::SessionsController < ApplicationController
-  def destroy
-  end
+class Public::SessionsController < Devise::SessionsController
+
 end

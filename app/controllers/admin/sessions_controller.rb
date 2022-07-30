@@ -1,10 +1,3 @@
-class Admin::SessionsController < ApplicationController
-  def new
-  end
+class Admin::SessionsController < Devise::SessionsController
 
-  def create
-  end
-
-  def destroy
-  end
 end
