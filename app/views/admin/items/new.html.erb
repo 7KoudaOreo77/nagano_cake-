@@ -1,2 +1,13 @@
 <h1>Admin::Items#new</h1>
 <p>Find me in app/views/admin/items/new.html.erb</p>
+
+<h5>商品新規登録</h5>
+<%= form_with model: @item, url: admin_items_path do |f| %>
+ <p>商品画像</p>
+ <P>商品名</P><%= f.text_field :name %>
+ <P>商品説明</P><%= f.text_area :introduction %>
+ <P>ジャンル</P>
+ <P>税抜価格</P><%= f.text_field :price %>円
+ <P>販売ステータス</P>
+ <%= f.submit '新規登録', admin_items_path(params[:id]) %>
+

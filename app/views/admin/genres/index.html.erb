@@ -11,6 +11,6 @@
 <% @genres.each do |genre| %>
 <div>
  <%= genre.name %>
- <%= f.submit '編集する', admin_genres_edit_path %>
+ <%= f.submit '編集する', edit_admin_genre_path(params[:id]) %>
 </div></br>
 <% end %>
