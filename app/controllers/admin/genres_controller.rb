@@ -1,7 +1,8 @@
 class Admin::GenresController < ApplicationController
   def index
-    @genre = Genre.new
+    @genre_new = Genre.new
     @genres = Genre.all
+    
 
   end
 
