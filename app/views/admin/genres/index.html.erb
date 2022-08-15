@@ -12,7 +12,7 @@
 <h4>ジャンル</h4>
 
 <% @genres.each do |genre| %>
- <%= form_tag("/posts/#{genre.id}/update") do %>
+ <%= form_tag(edit_admin_genre_path(genre.id), method: :get) do %>
   <%= genre.name %>
   <input type="submit" value="編集する">
   </br>
