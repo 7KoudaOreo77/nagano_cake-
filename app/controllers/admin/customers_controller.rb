@@ -1,5 +1,6 @@
 class Admin::CustomersController < ApplicationController
-  def index
+  def inde
+    
   end
 
   def show

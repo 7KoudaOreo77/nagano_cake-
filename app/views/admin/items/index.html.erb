@@ -15,10 +15,11 @@
   <P>税抜価格</P>
    <%= item.price %>
   <P>ジャンル</P>
-   <%= @genre.name %>
+
+   <%= item.genre.name %>
 
   <p>ステータス</p>
-   <%= item.status %>
+   <%= item.is_active %>
   </br>
 
 <% end %>
