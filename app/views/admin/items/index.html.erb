@@ -2,18 +2,23 @@
 <p>Find me in app/views/admin/items/index.html.erb</p>
 
 <h4>商品一覧</h4>
+<%= link_to "+", new_admin_item_path %>
+
 <% @items.each do |item| %>
- <div>
+
   <P>商品ID</P>
    <%= item.id %>
   <P>商品名</P>
+  <%= link_to admin_items_path(item.id) do %>
    <%= item.name %>
+  <% end %>
   <P>税抜価格</P>
    <%= item.price %>
   <P>ジャンル</P>
    <%= @genre.name %>
 
-  <p>ステータス</p
+  <p>ステータス</p>
    <%= item.status %>
- </div></br>
+  </br>
+
 <% end %>
