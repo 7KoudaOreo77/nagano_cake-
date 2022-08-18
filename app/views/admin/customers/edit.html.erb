@@ -48,9 +48,9 @@
   <div class="field">
   <p>会員ステータス</p>
    <%= f.radio_button :is_deleted, :false %>
-   <%= f.label :gender, "有効" , value: :false %>
+   <%= f.label :is_deleted, "有効" , value: :false %>
    <%= f.radio_button :is_deleted, :true %>
-   <%= f.label :gender, "退会", value: :true %>
+   <%= f.label :is_deleted, "退会", value: :true %>
   </div>
 
   <div class="actions">

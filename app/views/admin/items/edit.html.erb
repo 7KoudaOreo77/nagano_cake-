@@ -7,6 +7,13 @@
  <p>商品説明</p><%= f.text_area :introduction %>
  <p>ジャンル</p><%= @genre.name %>
  <p>税抜価格</p><%= item.price %>
- <p>販売ステータス</p><p>販売中</p><p>販売停止</p>
+ <div class="field">
+  <p>販売ステータス</p>
+   <%= f.radio_button :is_deleted, :false %>
+   <%= f.label :is_deleted, "販売中" , value: :false %>
+   <%= f.radio_button :is_deleted, :true %>
+   <%= f.label :is_deleted, "販売停止", value: :true %>
+ </div>
+
  <%= f.submit '変更を保存' %>
 <% end %>

@@ -1,5 +1,4 @@
 class Admin::CustomersController < ApplicationController
-  layout "app_admin"
   def index
     @customers = Customer.all
 
@@ -14,11 +13,18 @@ class Admin::CustomersController < ApplicationController
   end
 
   def update
+    @customer = Customer.find(params[:id])
+
+    if @customer.update(admin_customer_params)
+      redirect_to admin_customers_path
+    else
+      render edit_admin_customer_path
+    end
   end
 
   private
 
   def admin_customer_params
-    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email)
+    params.require(:customer).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number, :email, :is_deleted)
   end
 end

@@ -1,2 +1,8 @@
-<h1>Admin::Homes#top</h1>
+<h1>注文履歴一覧Admin::Homes#top</h1>
 <p>Find me in app/views/admin/homes/top.html.erb</p>
+<% @orders.each do |order| %>
+<h2>購入日時</h2>
+<h2>購入者</h2><%= order.customer.last_name %><%= order.customer.first_name %>
+<h2>注文個数</h2><%#= order_detail.amount %>
+<h2>注文ステータス</h2>
+<% end %>
