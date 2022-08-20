@@ -2,7 +2,14 @@
 <p>Find me in app/views/admin/items/show.html.erb</p>
 
 <h4>商品詳細</h4>
-<%= form_with model: @item, url: edit_admin_item_path(@item.id) do |f| %>
+
+<p>画像</p>
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, size: "200x200" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
+
  <p>商品名</p><%= @item.name %>
  <p>商品説明</p><%= @item.introduction %>
  <p>ジャンル</p><%= @genre.name %>
@@ -14,5 +21,4 @@
    <p>販売停止中</p>
   <% end%>
 
- <%= f.submit '編集する' %>
-<% end %>
+ <%= link_to '編集する', edit_admin_item_path(@item.id) %>

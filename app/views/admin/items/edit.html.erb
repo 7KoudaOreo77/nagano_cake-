@@ -1,18 +1,40 @@
 <h1>商品編集Admin::Items#edit</h1>
 <p>Find me in app/views/admin/items/edit.html.erb</p>
 
-<%= form_with madel: @item, url: admin_items_path, method: :patch do |f| %>
- <p>商品画像</p><%= f.file_field :image, accept: "image/*" %>
- <p>商品名</p><%= f.text_field :name %>
- <p>商品説明</p><%= f.text_area :introduction %>
- <p>ジャンル</p><%= @genre.name %>
- <p>税抜価格</p><%= item.price %>
+<%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+
+ <div class="field">
+  <%= f.label :"商品画像" %>
+  <%= f.file_field :image, accept: "image/*" %>
+ </div>
+
+ <div class="field">
+  <%= f.label :"商品名" %>
+  <%= f.text_field :name %>
+ </div>
+
+ <div class="field">
+  <%= f.label :"商品説明" %>
+  <%= f.text_area :introduction %>
+ </div>
+
+ <div class="field">
+  <%= f.label :"ジャンル明" %>
+  <%= f.collection_select(:genre_id, @genres, :id, :name) %>
+ </div>
+
+
+ <div class="field">
+  <%= f.label :"税抜価格" %>
+  <%= f.text_field :price  %>
+ </div>
+
  <div class="field">
   <p>販売ステータス</p>
-   <%= f.radio_button :is_deleted, :false %>
-   <%= f.label :is_deleted, "販売中" , value: :false %>
-   <%= f.radio_button :is_deleted, :true %>
-   <%= f.label :is_deleted, "販売停止", value: :true %>
+   <%= f.radio_button :is_active, :true %>
+   <%= f.label :is_active, "販売中" %>
+   <%= f.radio_button :is_active, :false %>
+   <%= f.label :is_active, "販売停止" %>
  </div>
 
  <%= f.submit '変更を保存' %>
