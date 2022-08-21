@@ -9,17 +9,31 @@
    <th>小計</th>
   </thead>
   <tbody>
-  <% @cart_items.each do |cart_item| %>
+  <%= form_with model: @order, url: thanks_public_orders_path do |f| %>
+
    <tr>
     <td>
 
-      <%= cart_item.item.name %>
+      <%= @cart_item.item.name %>
     </td>
-    <td><%= cart_item.item.with_tax_price %></td>
-    <td><%= cart_item.amount %></td>
-    <td><%= cart_item.subtotal %></td>
+    <td><%= @cart_item.item.with_tax_price %></td>
+    <td><%= @cart_item.amount %></td>
+    <td><%= @cart_item.subtotal %></td>
     <% @cart_item_price +=  cart_item.subtotal %>
    </tr>
-  <% end %>
+
   </tbody>
  </table>
+
+
+  <p>送料<%= order.shipping_cost %></p>
+  <p>商品合計</p><%= @cart_item_price %>
+  <% @cart_item_price +=  order.shipping_cost %>
+  <p>請求金額</p><%= @cart_item_price %>
+
+  <%= f.submit '注文を確定する'  %>
+ <% end %>
+
+ <h3>支払方法</h3><%=%>
+
+ <h3>お届け先</h3>
