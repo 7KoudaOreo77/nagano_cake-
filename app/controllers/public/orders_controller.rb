@@ -4,6 +4,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def confirm
+    @cart_items = CartItem.all
+    @cart_item_price = 0
   end
 
   def thanks

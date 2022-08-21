@@ -3,7 +3,7 @@
 
 <%= form_with model: @address, url: public_address_path(@address), method: :patch do |f| %>
 
-<div class="field">
+  <div class="field">
    <%= f.label :"郵便番号(ハイフンなし)" %>
    <%= f.text_field :postal_code %>
   </div>
