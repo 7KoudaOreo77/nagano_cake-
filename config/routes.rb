@@ -27,10 +27,14 @@ Rails.application.routes.draw do
   namespace :public do
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :orders, only: [:new, :confirm, :thanks, :create, :index, :show]
+     collection do
+      get "withdrawal" => "customers#withdrawal"
+     end
     resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
     resources :customers, only: [:show, :edit, :update, :withdrawal, :destroy] do
      collection do
-      get "withdrawal" => "customers#withdrawal"
+      get "confirm" => "customers#confirm"
+      get "thanks" => "customers#thanks"
      end
     end
     resources :sessions, only: [:new, :create, :destroy]
