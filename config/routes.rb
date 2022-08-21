@@ -27,8 +27,10 @@ Rails.application.routes.draw do
   namespace :public do
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
     resources :orders, only: [:new, :create, :index, :show] do
-      get "confirm" => "orders#confirm"
+     collection do
+      post "confirm" => "orders#confirm"
       get "thanks" => "orders#thanks"
+     end
     end
     resources :cart_items, only: [:index, :update, :destroy, :create] do
      collection do
