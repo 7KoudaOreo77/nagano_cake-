@@ -1,8 +1,14 @@
 <h1>注文情報入力Public::Orders#new</h1>
 <p>Find me in app/views/public/orders/new.html.erb</p>
 
-<h3>支払方法</h3>
-<h3>お届け先</h3>
+<%= form_with model: @item, url: admin_item_path(@item), method: :patch do |f| %>
+ <h3>支払方法</h3>
+  <%= f.radio_button :is_active, :true %>
+   <%= f.label :is_active, "販売中" %>
+   <%= f.radio_button :is_active, :false %>
+   <%= f.label :is_active, "販売停止" %>
+ <h3>お届け先</h3>
 
+ <%= f.submit '確認画面へ進む', public_confirm_path %>
+<% end %>
 
-<%#= link_to "確認画面へ進む", _path %>

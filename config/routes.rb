@@ -21,24 +21,26 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    resources :sessions, only: [:new, :create, :destroy]
+
   end
 
   namespace :public do
     resources :addresses, only: [:index, :edit, :create, :update, :destroy]
-    resources :orders, only: [:new, :confirm, :thanks, :create, :index, :show]
+    resources :orders, only: [:new, :create, :index, :show] do
+      get "confirm" => "orders#confirm"
+      get "thanks" => "orders#thanks"
+    end
+    resources :cart_items, only: [:index, :update, :destroy, :create] do
+     collection do
+      delete "destroy_all" => "cart_items#destroy_all"
+     end
+    end
+    resource :customers, only: [:show, :edit, :update, :destroy] do
      collection do
       get "withdrawal" => "customers#withdrawal"
      end
-    resources :cart_items, only: [:index, :update, :destroy, :destroy_all, :create]
-    resources :customers, only: [:show, :edit, :update, :withdrawal, :destroy] do
-     collection do
-      get "confirm" => "customers#confirm"
-      get "thanks" => "customers#thanks"
-     end
     end
-    resources :sessions, only: [:new, :create, :destroy]
-    resources :registrations, only: [:new, :create]
+
     resources :items, only: [:index, :show]
     resources :homes, only: [:top, :about]
   end
