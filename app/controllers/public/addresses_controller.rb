@@ -6,6 +6,7 @@ class Public::AddressesController < ApplicationController
   end
 
   def edit
+    @address = Address.find(params[:id])
   end
 
   def create
@@ -16,6 +17,13 @@ class Public::AddressesController < ApplicationController
   end
 
   def update
+    @address = Address.find(params[:id])
+
+    if @address.update(public_address_params)
+      redirect_to public_addresses_path
+    else
+      render edit_public_address_path
+    end
   end
 
   def destroy
