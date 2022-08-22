@@ -29,15 +29,20 @@
   </tbody>
  </table>
 
- <%= form_with model: @order, url: thanks_public_orders_path do |f| %>
+
   <p>送料<%= @order.shipping_cost %></p>
   <p>商品合計</p><%= @cart_item_price %>
   <% @cart_item_price +=  @order.shipping_cost %>
   <p>請求金額</p><%= @cart_item_price %>
 
-  <h3>支払方法</h3><%= @order.payment_method %>
+  <h3>支払方法</h3><%= @order.payment_method_i18n %>
 
   <h3>お届け先</h3><%= @order.address %>
-
+ <%= form_with model: @order, url: public_orders_path do |f| %>
+  <%= f.hidden_field :shipping_cost, :value => 800 %>
+  
+  
+  
+  
   <%= f.submit '注文を確定する'  %>
  <% end %>

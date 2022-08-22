@@ -7,16 +7,13 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items
     @cart_item_price = 0
 
-
-
     @order = Order.new(order_params)
     @order.shipping_cost = 800
-
 
      if params[:order][:address_option] == "0"
        @order.address = current_customer.address
        @order.postal_code = current_customer.postal_code
-       @order.address = current_customer.address
+       @order.name = current_customer.last_name+current_customer.first_name
        #@order.name = current_customer.name
 
      elsif params[:order][:address_option] == "1"
@@ -27,20 +24,24 @@ class Public::OrdersController < ApplicationController
      elsif params[:order][:address_option] == "2"
 
      end
-
-
   end
 
-  def thanks
-  end
 
   def create
+    @order = Order.new(order_params)
+    @order.save
+    redirect_to thanks_public_orders_path
   end
 
   def index
+    @orders = current_customer.orders
   end
 
   def show
+    @order = Order.find(params[:id])
+  end
+
+  def thanks
   end
 
   private
