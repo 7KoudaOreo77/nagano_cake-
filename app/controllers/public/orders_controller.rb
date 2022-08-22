@@ -30,6 +30,16 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.save
+     current_customer.cart_items.each do |cart_item|
+       @order_detail = OrderDetail.new
+       @order_detail.item_id = cart_item.item_id
+       @order_detail.order_id = @order.id
+       @order_detail.price = cart_item.item.with_tax_price
+       @order_detail.amount = cart_item.amount
+       @order_detail.making_status = 0
+       @order_detail.save
+      end
+
     redirect_to thanks_public_orders_path
   end
 
@@ -38,6 +48,8 @@ class Public::OrdersController < ApplicationController
   end
 
   def show
+    @cart_items = current_customer.cart_items
+    @cart_item_price = 0
     @order = Order.find(params[:id])
   end
 
