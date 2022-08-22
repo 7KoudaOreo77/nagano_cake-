@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:new, :create, :index, :show] do
      collection do
       post "confirm" => "orders#confirm"
-      get "thanks" => "orders#thanks"
+      post "thanks" => "orders#thanks"
      end
     end
     resources :cart_items, only: [:index, :update, :destroy, :create] do
@@ -37,9 +37,10 @@ Rails.application.routes.draw do
       delete "destroy_all" => "cart_items#destroy_all"
      end
     end
-    resource :customers, only: [:show, :edit, :update, :destroy] do
+    resource :customers, only: [:show, :edit, :update] do
      collection do
       get "withdrawal" => "customers#withdrawal"
+      patch "out" => "customers#out"
      end
     end
 

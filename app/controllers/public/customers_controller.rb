@@ -1,29 +1,31 @@
 class Public::CustomersController < ApplicationController
   def show
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
 
     if @customer.update(public_customer_params)
-      redirect_to public_customer_path
+      redirect_to public_customers_path
     else
-      render edit_public_customer_path
+      render edit_public_customers_path
     end
+
   end
 
   def withdrawal
     @customer = current_customer
   end
 
-  def destroy
-    @customer = Customer.find(params[:id])
-    @customer.destroy
+  def out
+    @customer = current_customer
+    @customer.update(is_deleted: true)
+    reset_session
     redirect_to root_path
   end
 

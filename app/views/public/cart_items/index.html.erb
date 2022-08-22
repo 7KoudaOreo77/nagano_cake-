@@ -14,8 +14,8 @@
   <% @cart_items.each do |cart_item| %>
    <tr>
     <td>
-      <% if cart_item.image.attached? %>
-       <%= image_tag cart_item.image, size: "200x200" %>
+      <% if cart_item.item.image.attached? %>
+       <%= image_tag cart_item.item.image, size: "200x200" %>
       <% else %>
        <%= image_tag 'no_image', size: "200x200" %>
       <% end %>
