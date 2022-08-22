@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get 'admin/homes/top' => 'homes#top'
     resources :order_details, only: [:update]
     get 'order_details/update'
-    resources :order, only: [:index, :update]
+    resources :order, only: [:show, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :genres, only: [:index, :create, :edit, :update]
     resources :items, only: [:index, :new, :create, :show, :edit, :update]

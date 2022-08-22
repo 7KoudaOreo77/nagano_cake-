@@ -1,11 +1,16 @@
 class Admin::HomesController < ApplicationController
 
   def top
-
     @customer = Customer.find_by(last_name: params[:last_name])
-
-    @order = Order.new
     @orders = Order.all
+
+    #@order = Order.find(params[:order][:customer_id])
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    @order.update
+    redirect_to admin_order_path(@order.id)
   end
 
   private

@@ -1,8 +1,32 @@
 <h1>注文履歴一覧Admin::Homes#top</h1>
 <p>Find me in app/views/admin/homes/top.html.erb</p>
-<% @orders.each do |order| %>
-<h2>購入日時</h2>
-<h2>購入者</h2><%= order.customer.last_name %><%= order.customer.first_name %>
-<h2>注文個数</h2><%#= order_detail.amount %>
-<h2>注文ステータス</h2>
-<% end %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>購入日時</th>
+      <th>購入者</th>
+      <th>注文個数</th>
+      <th>注文ステータス</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td>
+        <%#=link_to admin_order_path(@order.id), do %>
+         <%= order.created_at.strftime("%Y-%m-%d %X")%>
+        <%# end %>
+      </td>
+      <td>
+        <%= order.customer.last_name %><%= order.customer.first_name %>
+      </td>
+      <td>
+        <%= order.order_details.sum(:amount) %>
+      </td>
+      <td>
+        <%= order.status_i18n %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
