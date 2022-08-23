@@ -1,29 +1,36 @@
-<h1>Admin::Items#index</h1>
-<p>Find me in app/views/admin/items/index.html.erb</p>
+<div class="bg-secondary">商品一覧</div>
 
-<h4>商品一覧</h4>
-<%= link_to "+", new_admin_item_path %>
-
-<% @items.each do |item| %>
-
-  <P>商品ID</P>
-  <%= item.id %>
-  <P>商品名</P>
-  <%= link_to admin_item_path(item.id) do %>
-   <%= item.name %>
-  <% end %>
-  <P>税抜価格</P>
-   <%= item.price %>
-  <P>ジャンル</P>
-
-   <%= item.genre.name %>
-
-  <p>ステータス</p>
-   <% if item.is_active %>
-    <p>販売中</p>
-   <% else %>
-    <p>販売停止中</p>
-   <% end%>
-  </br>
-
+<%= link_to new_admin_item_path, class:"plus-btn" do %>
+ <span class="text-right">+</span>
 <% end %>
+ <table class="table", class="bg-secondary">
+  <thead class=>
+   <th>商品ID</th>
+   <th>商品名</th>
+   <th>税抜価格</th>
+   <th>ジャンル</th>
+   <th>ステータス</th>
+  </thead>
+  <tbody>
+  <% @items.each do |item| %>
+   <tr>
+    <td><%= item.id %></td>
+    <td>
+     <%= link_to admin_item_path(item.id) ,class:"item-name" do %>
+      <%= item.name %>
+     <% end %>
+    </td>
+    <td><%= item.price.to_s(:delimited) %></td>
+    <td><%= item.genre.name %></td>
+    <td>
+     <% if item.is_active %>
+      <p class="text-success">販売中</p>
+     <% else %>
+      <p class="text-secondary">販売停止中</p>
+     <% end %>
+    </td>
+   </tr>
+  <% end %>
+  </tbody>
+ </table>
+<%= paginate @items %>

@@ -1,2 +1,40 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.bg-secondary{
+ display: inline-block;
+ margin:30px;
+ padding: 1px 20px;
+ margin-left: 150px;
+ background-color:#DDDDDD;
+}
+
+.field{
+  padding:10px;
+}
+
+.label{
+  margin:10px;
+}
+
+.btn-sm{
+  padding: 5px 40px;
+  margin-top:20px;
+}
+
+.plus-btn{
+  border-radius: 50%;
+  background-color: #eee;
+  text-align:right;
+  width: 10px;
+  height: 10px;
+}
+
+.item-name{
+
+  color:black;
+}
+
+.table{
+  margin: 10px 120px;
+}

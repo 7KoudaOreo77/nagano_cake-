@@ -1,10 +1,8 @@
 class Admin::HomesController < ApplicationController
 
   def top
-    @customer = Customer.find_by(last_name: params[:last_name])
     @orders = Order.all
 
-    #@order = Order.find(params[:order][:customer_id])
   end
 
   def update
