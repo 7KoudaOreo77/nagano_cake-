@@ -7,16 +7,18 @@
 <h2>新着商品</h2>
 
 <% @items.last(4).each do |item| %>
+<%= link_to public_item_path(item.id) do %>
  <% if item.image.attached? %>
     <%= image_tag item.image, size: "200x200" %>
   <% else %>
     <%= image_tag 'no_image', size: "200x200" %>
   <% end %>
+ <% end %>
 
  <p>
-  <%= link_to public_item_path(item.id) do %>
+
    <%= item.name %>
-  <% end %>
+
  </p>
 
  <p>¥<%= item.price %></p>

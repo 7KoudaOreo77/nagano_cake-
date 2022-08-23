@@ -2,16 +2,18 @@
 <p>全<%= @items.count %>件Find me in app/views/public/items/index.html.erb</p>
 
 <% @items.each do |item| %>
+ <%= link_to public_item_path(item.id) do %>
  <% if item.image.attached? %>
     <%= image_tag item.image, size: "200x200" %>
   <% else %>
     <%= image_tag 'no_image', size: "200x200" %>
   <% end %>
+ <% end %>
 
  <p>
-  <%= link_to public_item_path(item.id) do %>
+
    <%= item.name %>
-  <% end %>
+
  </p>
 
  <p>¥<%= item.price %></p>

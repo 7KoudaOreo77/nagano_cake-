@@ -9,6 +9,11 @@
  <P>ジャンル</P><%= f.collection_select(:genre_id, @genres, :id, :name, prompt: "--選択をしてください--") %>
  <P>税抜価格</P><%= f.text_field :price %>円
  <P>販売ステータス</P>
+  <%= f.radio_button :is_active, "true" %>
+  <%= f.label :is_active, "販売中" %>
+
+  <%= f.radio_button :is_active, "false" %>
+  <%= f.label :is_active, "販売停止中" %></br>
  <%= f.submit '新規登録' %>
 <% end %>
 
