@@ -3,7 +3,7 @@
 
 <p>購入者</p><%= @order.customer.last_name %><%= @order.customer.first_name %>
 <p>注文日</p><%= @order.created_at.strftime("%Y-%m-%d %X")%>
-<p>配送先</p><%= @order.address %></br><%= @order.address %>
+<p>配送先</p><%= @order.address %></br><%= @order.name %>
 <p>支払方法</p><%= @order.payment_method_i18n %>
 <p>注文ステータス</p>
 <%= form_with model: @order, url: admin_order_path(@order.id), method: :patch do |f|%>
@@ -25,15 +25,15 @@
   <% @order.order_details.each do |order_detail| %>
    <tr>
     <td>
-     <%=link_to admin_customer_path(@order.customer_id) do %>
+     <%#=link_to admin_customer_path(@order.customer_id) do %>
       <%= order_detail.item.name %>
-     <% end %>
+     <%# end %>
     </td>
     <td><%= order_detail.item.with_tax_price %></td>
     <td><%= order_detail.amount %></td>
     <td><%= order_detail.item.with_tax_price*order_detail.amount %></td>
     <td><%= order_detail.making_status %>
-     <%= form_with model: @order, url: admin_order_detail_path(@order.id) do |f| %>
+     <%= form_with model: order_detail, url: admin_order_detail_path(order_detail.id) do |f| %>
       <%= f.select :making_status, OrderDetail.making_statuses.keys.map { |k| [I18n.t("enums.order_detail.making_status.#{k}"), k]} %>
       <%= f.submit "更新"%>
      <% end %>
