@@ -52,6 +52,7 @@ class Public::OrdersController < ApplicationController
     @cart_items = current_customer.cart_items
     @cart_item_price = 0
     @order = Order.find(params[:id])
+    @order_details = @order.order_details
   end
 
   def thanks

@@ -12,9 +12,9 @@ class Admin::OrderController < ApplicationController
       end
     end
 
-    
 
-     
+
+
 
      if @order.status =="finish"
        @order.update(status: "finish")
